@@ -10,7 +10,7 @@ while True:
     U - 고객 정보 수정
     D - 고객 정보 삭제
     Q - 프로그램 종료
-    """)
+    """).strip().upper()
     
     if choice is "I":
         customer = {"name": '', "gender": '', "email": '', "birthyear": ''}
@@ -72,4 +72,5 @@ while True:
     else:
         print("Invalid Menu.")
         print()
+        
     
