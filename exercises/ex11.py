@@ -28,14 +28,15 @@ print(p.match(email) != None)
 # for k, v in dic.items():
 #     print(k,v)
 
-a = 'avbc@'
+a = 'avbc'
 b = '1234'
 c = '한글'
-print(a.isalpha())
-print(a.isalnum())
-print(b.isdigit())
-print(c.isalnum())
-print(c.isalpha())
-print(c.isascii())
+# print(a.isalpha())
+# print(a.isalnum())
+# print(b.isdigit())
+# print(c.isalnum())
+# print(c.isalpha())
+# print(c.isascii())
 
-# print(a.find("@"))
+print(a.find("@"))
+print(len(b))

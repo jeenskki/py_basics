@@ -1,9 +1,21 @@
-# a = [0, 0, 0, 0, 0]
-# b = a
-# b[2] = 99
-# print(a)
-# print(b)
+def abc():
+    print (2 + 4)
+    
+#abc()
 
-a = [38, 21, 53 ,62, 19]
-for index, value in enumerate(a):
-    print(index,  value)
+def pl (a, b):
+    print(a + b)
+
+# pl (10, 20)
+
+def ret(a, b):
+    return a + b
+
+#a = ret(10, 20)
+#print(a)
+#print(ret(10, 20))
+
+if a == 30:
+    print(a)
+else:
+    print("blah blah")
