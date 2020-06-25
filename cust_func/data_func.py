@@ -1,15 +1,29 @@
 import re
 from datetime import datetime as dt
 
+def input_menu():
+    return input("""
+        다음 중 작업 하실 메뉴를 입력 하세요.
+        
+        I - 고객 정보 입력
+        C - 현재 고객 정보 출력
+        P - 이전 고객 정보 출력
+        N - 다음 고객 정보 출력
+        U - 고객 정보 수정
+        D - 고객 정보 삭제
+        Q - 프로그램 종료
+        
+        >> """).strip().upper()
+    
 def  input_cust (l, p):
      
     while True:
         name = input("이름을 입력하세요 : ")
-        if name.isalpha() is True:
+        if re.search(r'[0-9]-=.#/?:$}]', name):
             break
         else:
             print("이름 형식이 맞지 않습니다.")
-    
+        
     while True:
         gender = input("성별을 입력하세요 (M / F) : ").upper()
         if gender in ("M", "F"):
@@ -37,20 +51,6 @@ def  input_cust (l, p):
     print("고객 정보가 성공적으로 저장되었습니다.")
     
     return p
-
-def input_menu():
-    return input("""
-        다음 중 작업 하실 메뉴를 입력 하세요.
-        
-        I - 고객 정보 입력
-        C - 현재 고객 정보 출력
-        P - 이전 고객 정보 출력
-        N - 다음 고객 정보 출력
-        U - 고객 정보 수정
-        D - 고객 정보 삭제
-        Q - 프로그램 종료
-        
-        >> """).strip().upper()
         
 def update_cust (l):
     cName = input("수정할 고객의 이름을 입력해 주세요 : ")
@@ -85,6 +85,7 @@ def update_cust (l):
             if new_gender in ("M", "F"):
                 l[idx]["gender"] = new_gender
                 print("[{0}] 번 페이지의 [{1}] 항목이 [{2}] (으)로 변경되었습니다.".format(idx, "gender", new_gender))
+                break
             else:
                 print("성별이 형식에 맞지 않습니다.")
 
