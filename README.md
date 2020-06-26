@@ -8,5 +8,6 @@ print("Hello World")
 
 ## File Explanation
 
-### cust_v0.9.py
-고객 정보 관리 시스템 (작업중)
+### cust_v1.0.py
+####고객 정보 관리 시스템
+
