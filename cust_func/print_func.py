@@ -23,7 +23,6 @@ def  print_c (l, p):
 
 def  print_p (l, p):
      
-    
     if p == -1 :
         print("입력된 정보가 없습니다.")
     elif p == 0 :
@@ -34,7 +33,7 @@ def  print_p (l, p):
         print("현재 고객 페이지 번호 : %d" % p)
         print(l[p])
         
-        return p
+    return p
 
 def  print_n (l, p): 
     

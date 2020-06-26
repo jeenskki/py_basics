@@ -1,4 +1,6 @@
 import re
+import os
+import pickle as pkl
 from datetime import datetime as dt
 
 def input_menu():
@@ -19,7 +21,7 @@ def  input_cust (l, p):
      
     while True:
         name = input("이름을 입력하세요 : ")
-        if re.search(r'[0-9]-=.#/?:$}]', name):
+        if name.isalpha():
             break
         else:
             print("이름 형식이 맞지 않습니다.")
@@ -33,10 +35,11 @@ def  input_cust (l, p):
         
     while True:
         email = input("이메일을 입력하세요 : ")
-        if re.search(r'[\w+]+@[\w.+]+\.+[\w+]', email):
+        if check_email(l, email):
             break
         else:
-            print("이메일 형식이 맞지 않습니다.")
+            print("이메일 형식이 맞지 않거나 중복되었습니다.")
+            
             
     while True:
         birthyear = int(input("생년을 입력하세요 : "))
@@ -45,7 +48,10 @@ def  input_cust (l, p):
         else:
             break
     
-    customer = {"name": name, "email": email, "gender": gender, "birthyear": birthyear}
+    customer = {"name"  : name,
+                "gender": gender,
+                "email" : email,
+                "birthyear": birthyear}
     l.append(customer)
     p = len(l) - 1
     print("고객 정보가 성공적으로 저장되었습니다.")
@@ -53,10 +59,10 @@ def  input_cust (l, p):
     return p
         
 def update_cust (l):
-    cName = input("수정할 고객의 이름을 입력해 주세요 : ")
+    check_cust = input("수정할 고객의 이메일을 입력해 주세요 : ")
     idx = -1
     for i, val in enumerate(l):
-        if val["name"] == cName.strip():
+        if val["email"] == check_cust.strip():
             idx = i
             break
         
@@ -72,7 +78,7 @@ def update_cust (l):
     if cKey == "1":
         while True:
             new_name = input("수정할 이름을 입력하세요 : ")
-            if new_name.isalpha() is True:
+            if new_name.isalpha():
                 l[idx]["name"] = new_name
                 print("[{0}] 번 페이지의 [{1}] 항목이 [{2}] (으)로 변경되었습니다.".format(idx, "name", new_name))
                 break
@@ -92,12 +98,12 @@ def update_cust (l):
     elif cKey == "3":
         while True:
             new_email = input("수정할 이메일을 입력하세요 : ")
-            if re.search(r'[\w+]+@[\w.+]+\.+[\w+]', new_email):
+            if check_email(l, new_email):
                 l[idx]["email"] = new_email
                 print("[{0}] 번 페이지의 [{1}] 항목이 [{2}] (으)로 변경되었습니다.".format(idx, "email", new_email))
                 break
             else:
-                print("이메일이 형식에 맞지 않습니다.")
+                print("이메일이 형식에 맞지 않거나 중복되었습니다.")
                 
     elif cKey == "4":
         while True:
@@ -137,3 +143,33 @@ def delete_cust (l, p):
                 print("메뉴를 잘못 선택하셨습니다.")
     
     return p
+
+def save_cust(l):
+    with open('./data/cust_data.pkl', 'wb') as f:
+        pkl.dump(l, f)
+    print("데이터가 저장되었습니다.")
+        
+def load_cust(l):
+    if os.path.exists('./data/cust_data.pkl'):
+        with open('./data/cust_data.pkl', 'rb') as f:
+            l = pkl.load(f)
+        page = len(l) - 1
+        print("*"*5+" 데이터를 불러옵니다 " + "*" *5)
+        print("데이터 내 페이지 갯수 : %d" % len(l))
+    else:
+        print("저장된 데이터가 존재하지 않습니다.")
+        page = -1
+    return l, page
+
+def check_email(l, e):
+    checker = re.compile(
+        '^[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*@[0-9a-zA-Z]([-_.]?[0-9a-zA-Z])*.[a-zA-Z]{2,3}$')
+    
+    # 중복 검사
+    for i, val in enumerate(l):
+        if val["email"] == e:
+            print("[%d] 번째 페이지와 이메일 주소 중복." % i)
+            return False
+
+    return checker.search(e)
+    
