@@ -11,9 +11,10 @@ def print_menu():
         Q - 프로그램 종료
         
         >> """).strip().upper()
-    
-def  print_c (l, p):
-     
+
+
+def print_c(l, p):
+
     if p >= 0:
         print("현재 고객 페이지 번호 : %d" % p)
         print(l[p])
@@ -21,22 +22,24 @@ def  print_c (l, p):
         print("입력된 정보가 없습니다.")
     return
 
-def  print_p (l, p):
-     
-    if p == -1 :
+
+def print_p(l, p):
+
+    if p == -1:
         print("입력된 정보가 없습니다.")
-    elif p == 0 :
+    elif p == 0:
         print("가장 이전의 정보입니다.")
         print(l[p])
-    else :
+    else:
         p -= 1
         print("현재 고객 페이지 번호 : %d" % p)
         print(l[p])
-        
+
     return p
 
-def  print_n (l, p): 
-    
+
+def print_n(l, p):
+
     if p == -1:
         print("입력된 정보가 없습니다.")
     elif p == len(l) - 1:
@@ -46,5 +49,5 @@ def  print_n (l, p):
         p += 1
         print("현재 고객 페이지 번호 : %d" % p)
         print(l[p])
-        
-    return p    
+
+    return p
